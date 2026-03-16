@@ -4,6 +4,7 @@ import com.gustavo.brilhante.coinroutine.appsekret.AppSecrets
 import com.gustavo.brilhante.coinroutine.coins.data.remote.dto.CoinDetailsResponseDto
 import com.gustavo.brilhante.coinroutine.coins.data.remote.dto.CoinPriceHistoryResponseDto
 import com.gustavo.brilhante.coinroutine.coins.data.remote.dto.CoinsResponseDto
+import com.gustavo.brilhante.coinroutine.coins.domain.api.CoinsRemoteDataSource
 import com.gustavo.brilhante.coinroutine.core.domain.Result
 import com.gustavo.brilhante.coinroutine.core.domain.DataError
 import com.gustavo.brilhante.coinroutine.core.network.safeCall

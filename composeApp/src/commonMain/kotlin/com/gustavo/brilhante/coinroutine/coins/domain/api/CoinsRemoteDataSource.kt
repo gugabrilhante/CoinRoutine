@@ -1,4 +1,4 @@
-package com.gustavo.brilhante.coinroutine.coins.data.remote.impl
+package com.gustavo.brilhante.coinroutine.coins.domain.api
 
 import com.gustavo.brilhante.coinroutine.coins.data.remote.dto.CoinDetailsResponseDto
 import com.gustavo.brilhante.coinroutine.coins.data.remote.dto.CoinPriceHistoryResponseDto
