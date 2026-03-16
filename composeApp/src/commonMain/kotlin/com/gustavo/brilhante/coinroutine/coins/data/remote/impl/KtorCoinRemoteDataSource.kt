@@ -1,5 +1,6 @@
 package com.gustavo.brilhante.coinroutine.coins.data.remote.impl
 
+import com.gustavo.brilhante.coinroutine.appsekret.AppSecrets
 import com.gustavo.brilhante.coinroutine.coins.data.remote.dto.CoinDetailsResponseDto
 import com.gustavo.brilhante.coinroutine.coins.data.remote.dto.CoinPriceHistoryResponseDto
 import com.gustavo.brilhante.coinroutine.coins.data.remote.dto.CoinsResponseDto
@@ -17,13 +18,13 @@ class KtorCoinsRemoteDataSource(
 
     override suspend fun getListOfCoins(): Result<CoinsResponseDto, DataError.Remote> {
         return safeCall {
-            httpClient.get("$BASE_URL/coins")
+            httpClient.get("${AppSecrets.apiURL}/coins")
         }
     }
 
     override suspend fun getPriceHistory(coinId: String): Result<CoinPriceHistoryResponseDto, DataError.Remote> {
         return safeCall {
-            httpClient.get("$BASE_URL/coin/$coinId/history")
+            httpClient.get("${AppSecrets.apiURL}/coin/$coinId/history")
         }
     }
 

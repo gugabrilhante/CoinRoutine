@@ -1,5 +1,6 @@
 package com.gustavo.brilhante.coinroutine.core.network
 
+import com.gustavo.brilhante.coinroutine.appsekret.AppSecrets
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.HttpTimeout
@@ -28,8 +29,7 @@ object HttpClientFactory{
             }
             install(HttpCache)
             defaultRequest {
-                //TODO add API token
-                headers { append("x-access-token", "") }
+                headers { append("x-access-token", AppSecrets.apiKey) }
                 contentType(ContentType.Application.Json)
             }
         }
