@@ -11,11 +11,11 @@ actual object AppSecrets {
             fileType = "plist",
             valueKey = "apiKey"
         ) ?: ""
-    actual val apiSecret: String
+    actual val apiURL: String
         get() = getStringResource(
             filename = "Secrets",
             fileType = "plist",
-            valueKey = "apiSecrets"
+            valueKey = "apiUrl"
         ) ?: ""
 }
 

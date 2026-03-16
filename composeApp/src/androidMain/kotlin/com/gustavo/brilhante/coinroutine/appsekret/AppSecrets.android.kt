@@ -3,7 +3,7 @@ package com.gustavo.brilhante.coinroutine.appsekret
 import dev.coinroutine.app.BuildConfig
 
 actual object AppSecrets {
-    actual val apiSecret: String
+    actual val apiURL: String
         get() = BuildConfig.API_BASE_URL
     actual val apiKey: String
         get() = BuildConfig.API_KEY
