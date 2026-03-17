@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.update
 import com.gustavo.brilhante.coinroutine.core.domain.Result
 import com.gustavo.brilhante.coinroutine.core.util.formatFiat
 import com.gustavo.brilhante.coinroutine.core.util.formatPercentage
+import com.gustavo.brilhante.coinroutine.core.util.toUiText
 
 class CoinsListViewModel(
     private val getCoinsListUseCase: GetCoinsListUseCase,
@@ -50,7 +51,7 @@ class CoinsListViewModel(
                 _state.update {
                     it.copy(
                         coins = emptyList(),
-                        error = null //TODO: coinsResponse.error.toUiText()
+                        error = coinsResponse.error.toUiText(),
                     )
                 }
             }
