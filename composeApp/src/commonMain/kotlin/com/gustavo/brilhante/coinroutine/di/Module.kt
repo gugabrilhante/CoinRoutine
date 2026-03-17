@@ -1,11 +1,14 @@
 package com.gustavo.brilhante.coinroutine.di
 
+import androidx.room.RoomDatabase
 import com.gustavo.brilhante.coinroutine.coins.data.remote.impl.KtorCoinsRemoteDataSource
 import com.gustavo.brilhante.coinroutine.coins.domain.GetCoinDetailsUseCase
 import com.gustavo.brilhante.coinroutine.coins.domain.GetCoinPriceHistoryUseCase
 import com.gustavo.brilhante.coinroutine.coins.domain.GetCoinsListUseCase
 import com.gustavo.brilhante.coinroutine.coins.domain.api.CoinsRemoteDataSource
 import com.gustavo.brilhante.coinroutine.coins.presentation.CoinsListViewModel
+import com.gustavo.brilhante.coinroutine.core.database.portifolio.PortfolioDatabase
+import com.gustavo.brilhante.coinroutine.core.database.portifolio.getPortfolioDatabase
 import com.gustavo.brilhante.coinroutine.core.network.HttpClientFactory
 import io.ktor.client.HttpClient
 import org.koin.core.context.startKoin
@@ -32,6 +35,11 @@ val sharedModule = module {
 
     // core
     single<HttpClient> { HttpClientFactory.create(get()) }
+
+    // portfolio
+    single {
+        getPortfolioDatabase(get<RoomDatabase.Builder<PortfolioDatabase>>())
+    }
 
     // coins list
     viewModel { CoinsListViewModel(get(), get()) }
