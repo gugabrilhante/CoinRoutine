@@ -1,4 +1,4 @@
-package com.gustavo.brilhante.coinroutine.coins.data.local
+package com.gustavo.brilhante.coinroutine.portfolio.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
