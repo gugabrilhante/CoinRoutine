@@ -16,7 +16,7 @@ import com.gustavo.brilhante.coinroutine.portfolio.presentation.PortfolioViewMod
 import com.gustavo.brilhante.coinroutine.trade.domain.BuyCoinUseCase
 import com.gustavo.brilhante.coinroutine.trade.domain.SellCoinUseCase
 import com.gustavo.brilhante.coinroutine.trade.presentation.buy.BuyViewModel
-import com.gustavo.brilhante.coinroutine.trade.presentation.buy.SellViewModel
+import com.gustavo.brilhante.coinroutine.trade.presentation.sell.SellViewModel
 import io.ktor.client.HttpClient
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module

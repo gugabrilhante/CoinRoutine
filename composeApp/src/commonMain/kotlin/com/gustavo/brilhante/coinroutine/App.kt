@@ -15,7 +15,7 @@ import com.gustavo.brilhante.coinroutine.core.navigation.Sell
 import com.gustavo.brilhante.coinroutine.portfolio.presentation.PortfolioScreen
 import com.gustavo.brilhante.coinroutine.theme.CoinRoutineTheme
 import com.gustavo.brilhante.coinroutine.trade.presentation.buy.BuyScreen
-import com.gustavo.brilhante.coinroutine.trade.presentation.buy.SellScreen
+import com.gustavo.brilhante.coinroutine.trade.presentation.sell.SellScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable

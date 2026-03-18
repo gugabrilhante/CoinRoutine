@@ -1,8 +1,12 @@
 package com.gustavo.brilhante.coinroutine.trade.presentation.buy
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import com.gustavo.brilhante.coinroutine.trade.presentation.common.TradeScreen
 import com.gustavo.brilhante.coinroutine.trade.presentation.common.TradeType
 import org.koin.compose.viewmodel.koinViewModel
@@ -13,6 +17,7 @@ fun BuyScreen(
     coinId: String,
     navigateToPortfolio: () -> Unit,
 ) {
+    val lifecycleOwner = LocalLifecycleOwner.current
     val viewModel = koinViewModel<BuyViewModel>(
         parameters = {
             parametersOf(coinId)
@@ -20,7 +25,17 @@ fun BuyScreen(
     )
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    //TODO: handle coinId
+    LaunchedEffect(viewModel.events) {
+        lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            viewModel.events.collect { event ->
+                when (event) {
+                    is BuyEvents.BuySuccess -> {
+                        navigateToPortfolio()
+                    }
+                }
+            }
+        }
+    }
 
     TradeScreen(
         state = state,

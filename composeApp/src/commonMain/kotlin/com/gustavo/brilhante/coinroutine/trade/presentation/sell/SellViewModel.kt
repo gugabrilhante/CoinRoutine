@@ -1,4 +1,4 @@
-package com.gustavo.brilhante.coinroutine.trade.presentation.buy
+package com.gustavo.brilhante.coinroutine.trade.presentation.sell
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,10 +11,12 @@ import com.gustavo.brilhante.coinroutine.trade.domain.SellCoinUseCase
 import com.gustavo.brilhante.coinroutine.trade.presentation.common.TradeState
 import com.gustavo.brilhante.coinroutine.trade.presentation.common.UiTradeCoinItem
 import com.gustavo.brilhante.coinroutine.trade.presentation.mapper.toCoin
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -57,6 +59,10 @@ class SellViewModel(
         started = SharingStarted.WhileSubscribed(),
         initialValue = TradeState(isLoading = true)
     )
+
+    private val _events = Channel<SellEvents>(capacity = Channel.BUFFERED)
+    val events = _events.receiveAsFlow()
+
 
     fun onAmountChanged(amount: String) {
         _amount.value = amount
@@ -101,7 +107,7 @@ class SellViewModel(
             )
             when (sellCoinResponse) {
                 is Result.Success -> {
-                    // TODO: add event and navigation
+                    _events.send(SellEvents.SellSuccess)
                 }
 
                 is Result.Error -> {
@@ -115,4 +121,8 @@ class SellViewModel(
             }
         }
     }
+}
+
+sealed interface SellEvents {
+    data object SellSuccess : SellEvents
 }

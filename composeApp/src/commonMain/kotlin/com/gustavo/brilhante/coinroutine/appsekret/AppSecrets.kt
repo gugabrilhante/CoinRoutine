@@ -1,6 +1,6 @@
 package com.gustavo.brilhante.coinroutine.appsekret
 
 expect object AppSecrets {
-    val apiURL: String
+    val apiUrl: String
     val apiKey: String
 }
