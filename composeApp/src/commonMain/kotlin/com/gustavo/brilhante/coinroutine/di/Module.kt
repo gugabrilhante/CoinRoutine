@@ -15,6 +15,8 @@ import com.gustavo.brilhante.coinroutine.portfolio.domain.PortfolioRepository
 import com.gustavo.brilhante.coinroutine.portfolio.presentation.PortfolioViewModel
 import com.gustavo.brilhante.coinroutine.trade.domain.BuyCoinUseCase
 import com.gustavo.brilhante.coinroutine.trade.domain.SellCoinUseCase
+import com.gustavo.brilhante.coinroutine.trade.presentation.buy.BuyViewModel
+import com.gustavo.brilhante.coinroutine.trade.presentation.buy.SellViewModel
 import io.ktor.client.HttpClient
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -60,4 +62,6 @@ val sharedModule = module {
     // trade
     singleOf(::BuyCoinUseCase)
     singleOf(::SellCoinUseCase)
+    viewModel { BuyViewModel(get(), get(), get()) }
+    viewModel { SellViewModel(get(), get(), get()) }
 }
