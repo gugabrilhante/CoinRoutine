@@ -3,6 +3,8 @@ package com.gustavo.brilhante.coinroutine.core.navigation
 import kotlinx.serialization.Serializable
 
 @Serializable
+object Biometric
+@Serializable
 object Portfolio
 
 @Serializable
