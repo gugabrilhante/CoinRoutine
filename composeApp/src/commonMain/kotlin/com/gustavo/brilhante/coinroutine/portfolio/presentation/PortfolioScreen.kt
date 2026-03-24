@@ -33,7 +33,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
+import coinroutine.composeapp.generated.resources.Res
+import coinroutine.composeapp.generated.resources.buy_coin
+import coinroutine.composeapp.generated.resources.cash_balance
+import coinroutine.composeapp.generated.resources.discover_coins
+import coinroutine.composeapp.generated.resources.error_unknown
+import coinroutine.composeapp.generated.resources.no_coins_in_your_portfolio_yet
+import coinroutine.composeapp.generated.resources.owned_coins
+import coinroutine.composeapp.generated.resources.total_value
 import com.gustavo.brilhante.coinroutine.theme.LocalCoinRoutineColorsPalette
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -108,7 +117,7 @@ private fun PortfolioBalanceSection(
         ) {
             Spacer(modifier = Modifier.weight(1f))
             Text(
-                text = "Total Value:",
+                text = stringResource(Res.string.total_value),
                 color = MaterialTheme.colorScheme.primary,
                 fontSize = MaterialTheme.typography.titleSmall.fontSize,
             )
@@ -120,7 +129,7 @@ private fun PortfolioBalanceSection(
             )
             Row {
                 Text(
-                    text = "Cash Balance: ",
+                    text = stringResource(Res.string.cash_balance),
                     color = MaterialTheme.colorScheme.primary,
                     fontSize = MaterialTheme.typography.bodySmall.fontSize,
                 )
@@ -141,7 +150,7 @@ private fun PortfolioBalanceSection(
                     contentPadding = PaddingValues(horizontal = 64.dp),
                 ) {
                     Text(
-                        text = "Buy Coin",
+                        text = stringResource(Res.string.buy_coin),
                         color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.bodyLarge,
                     )
@@ -176,7 +185,7 @@ private fun PortfolioCoinsList(
                     .fillMaxSize()
             ) {
                 Text(
-                    text = "💰 Owned Coins: ",
+                    text = stringResource(Res.string.owned_coins),
                     color = MaterialTheme.colorScheme.onBackground,
                     fontSize = MaterialTheme.typography.titleLarge.fontSize,
                     modifier = Modifier
@@ -266,7 +275,7 @@ fun PortfolioEmptySection(
             .padding(32.dp)
     ) {
         Text(
-            text = "No coins in your portfolio yet.",
+            text = stringResource(Res.string.no_coins_in_your_portfolio_yet),
             color = MaterialTheme.colorScheme.primary,
             fontSize = MaterialTheme.typography.titleSmall.fontSize
         )
@@ -278,7 +287,7 @@ fun PortfolioEmptySection(
             contentPadding = PaddingValues(horizontal = 64.dp),
         ) {
             Text(
-                text = "Discover coins",
+                text = stringResource(Res.string.discover_coins),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onPrimary
             )

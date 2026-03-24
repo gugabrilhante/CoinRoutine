@@ -41,6 +41,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import coinroutine.composeapp.generated.resources.Res
+import coinroutine.composeapp.generated.resources.buy_amount
+import coinroutine.composeapp.generated.resources.sell_amount
 import com.gustavo.brilhante.coinroutine.theme.LocalCoinRoutineColorsPalette
 import com.gustavo.brilhante.coinroutine.trade.presentation.common.component.rememberCurrencyVisualTransformation
 import org.jetbrains.compose.resources.stringResource
@@ -90,8 +93,8 @@ fun TradeScreen(
             Spacer(modifier = Modifier.height(24.dp))
             Text(
                 text = when (tradeType) {
-                    TradeType.BUY -> "Buy Amount"
-                    TradeType.SELL -> "Sell Amount"
+                    TradeType.BUY -> stringResource(Res.string.buy_amount)
+                    TradeType.SELL -> stringResource(Res.string.sell_amount)
                 },
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onBackground,
@@ -128,8 +131,8 @@ fun TradeScreen(
         ) {
             Text(
                 text = when (tradeType) {
-                    TradeType.BUY -> "Buy Now"
-                    TradeType.SELL -> "Sell Now"
+                    TradeType.BUY -> stringResource(Res.string.buy_amount)
+                    TradeType.SELL -> stringResource(Res.string.sell_amount)
                 },
                 style = MaterialTheme.typography.bodyLarge,
                 color = when (tradeType) {

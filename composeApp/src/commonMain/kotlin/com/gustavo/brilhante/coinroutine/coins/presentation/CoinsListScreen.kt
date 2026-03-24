@@ -34,8 +34,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
+import coinroutine.composeapp.generated.resources.Res
+import coinroutine.composeapp.generated.resources._24_price_chart_for
+import coinroutine.composeapp.generated.resources.close
+import coinroutine.composeapp.generated.resources.top_coins
 import com.gustavo.brilhante.coinroutine.coins.presentation.component.PerformanceChart
 import com.gustavo.brilhante.coinroutine.theme.LocalCoinRoutineColorsPalette
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -97,7 +102,7 @@ fun CoinsList(
         ) {
             item {
                 Text(
-                    text = "🔥 Top Coins:",
+                    text = stringResource(Res.string.top_coins),
                     color = MaterialTheme.colorScheme.onBackground,
                     fontSize = MaterialTheme.typography.titleLarge.fontSize,
                     modifier = Modifier.padding(16.dp)
@@ -113,6 +118,7 @@ fun CoinsList(
         }
     }
 }
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun CoinListItem(
@@ -182,7 +188,7 @@ fun CoinChartDialog(
         onDismissRequest = onDismiss,
         title = {
             Text(
-                text = "24h Price chart for ${uiChartState.coinName}",
+                text = stringResource(Res.string._24_price_chart_for, uiChartState.coinName),
             )
         },
         text = {
@@ -211,7 +217,7 @@ fun CoinChartDialog(
                 onClick = onDismiss
             ) {
                 Text(
-                    text = "Close",
+                    text = stringResource(Res.string.close),
                 )
             }
         }

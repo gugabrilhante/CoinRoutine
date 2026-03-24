@@ -1,3 +1,101 @@
+🚀 Getting Started
+
+  To run this Kotlin Multiplatform (KMP) project, make sure your environment is properly set up.
+
+✅ Prerequisites
+
+  Follow the official JetBrains guide to configure your environment:
+  👉 https://kotlinlang.org/docs/multiplatform/get-started.html
+  
+  This includes:
+  
+    Installing Android Studio (with KMP support)
+    
+    Setting up Xcode (for iOS)
+    
+    Configuring Kotlin Multiplatform environment
+
+🔐 API Configuration (CoinRanking)
+
+  This project uses the CoinRanking API to fetch cryptocurrency data.
+  Create an account at CoinRanking and generate your API key.
+  Store the API credentials locally as described below:
+
+📱 Android
+  Create (or update) a secrets.properties file in the root project and add:
+
+    API_KEY=""
+    API_BASE_URL=""
+
+🍎 iOS
+  Using Xcode, create a Secrets.plist file and add the following properties:
+
+    apiUrl : String
+    apiKey : String
+
+📱 About the project
+
+    This application is a virtual cryptocurrency wallet that simulates portfolio management, buy/sell operations, and fetches real-time market data from external APIs.
+    
+    It follows modern mobile development best practices, focusing on scalability, performance, and clean code organization.
+
+✨ Key Features
+
+  💰 Simulated Crypto Wallet
+
+    Manage a portfolio with buy/sell logic.
+  
+  🌐 Real-time API Integration
+
+    Fetch live data using Ktor 3.
+  
+  🎨 Modern UI with Compose Multiplatform
+
+    Animations
+    Dark/Light themes
+    Custom components (TextFields, etc.)
+    Type-safe navigation (Safe Args)
+  
+  🖼️ Image Loading
+
+    Powered by Coil 3.
+  
+  💾 Local Data Persistence
+
+    Using Room 2.7.0, shared across platforms.
+
+🧱 Architecture
+
+  🧼 Clean Architecture
+
+    Clear separation of concerns (Domain, Data, Presentation)
+  
+  🔌 Dependency Injection
+
+    Managed with Koin 4
+
+🧪 Testing & Reliability
+
+  ✅ Unit and UI testing with:
+  
+    Kotlin Test
+    Turbine (Flow testing)
+    AssertK
+  
+  ⚠️ Robust error handling and state management
+
+🛠️ Tech Stack
+
+  Kotlin 2
+  Compose Multiplatform
+  Ktor 3
+  Coil 3
+  Room 2.7.0
+  Koin 4
+
+🎯 Goal 
+  Demonstrate how to build modern cross-platform applications using Kotlin, applying advanced concepts in architecture, API integration, and shared UI development.
+
 This is a Kotlin Multiplatform project targeting Android, iOS.
 
 * [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
