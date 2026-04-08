@@ -1,4 +1,5 @@
 name: iOS CI
+run-name: ${{ github.actor }} is building iOS App
 
 on:
   push:
