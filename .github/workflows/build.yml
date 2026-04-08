@@ -64,6 +64,9 @@ jobs:
   build-ios:
     name: Build iOS (macOS)
     runs-on: macos-latest
+    env:
+      API_KEY: ${{ secrets.API_KEY }}
+      API_BASE_URL: ${{ secrets.API_BASE_URL }}
 
     steps:
       - name: Checkout
