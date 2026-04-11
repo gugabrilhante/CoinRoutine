@@ -1,135 +1,208 @@
-Demonstration: https://github.com/gugabrilhante/CoinRoutine/issues/1#issue-4129287259
+# CoinRoutine — Kotlin Multiplatform Crypto Wallet
 
-🚀 Getting Started
+_A cross-platform cryptocurrency wallet simulation built with Kotlin Multiplatform, sharing UI and business logic between Android and iOS._
 
-  To run this Kotlin Multiplatform (KMP) project, make sure your environment is properly set up.
-
-✅ Prerequisites
-
-  Follow the official JetBrains guide to configure your environment:
-  👉 https://kotlinlang.org/docs/multiplatform/get-started.html
-  
-  This includes:
-  
-    Installing Android Studio (with KMP support)
-    
-    Setting up Xcode (for iOS)
-    
-    Configuring Kotlin Multiplatform environment
-
-🔐 API Configuration (CoinRanking)
-
-  This project uses the CoinRanking API to fetch cryptocurrency data.
-  Create an account at CoinRanking and generate your API key.
-  Store the API credentials locally as described below:
-
-📱 Android
-  Create (or update) a secrets.properties file in the root project and add:
-
-    API_KEY=""
-    API_BASE_URL=""
-
-🍎 iOS
-  Using Xcode, create a Secrets.plist file and add the following properties:
-
-    apiUrl : String
-    apiKey : String
-
-📱 About the project
-
-    This application is a virtual cryptocurrency wallet that simulates portfolio management, buy/sell operations, and fetches real-time market data from external APIs.
-    
-    It follows modern mobile development best practices, focusing on scalability, performance, and clean code organization.
-
-✨ Key Features
-
-  💰 Simulated Crypto Wallet
-
-    Manage a portfolio with buy/sell logic.
-  
-  🌐 Real-time API Integration
-
-    Fetch live data using Ktor 3.
-  
-  🎨 Modern UI with Compose Multiplatform
-
-    Animations
-    Dark/Light themes
-    Custom components (TextFields, etc.)
-    Type-safe navigation (Safe Args)
-  
-  🖼️ Image Loading
-
-    Powered by Coil 3.
-  
-  💾 Local Data Persistence
-
-    Using Room 2.7.0, shared across platforms.
-
-🧱 Architecture
-
-  🧼 Clean Architecture
-
-    Clear separation of concerns (Domain, Data, Presentation)
-  
-  🔌 Dependency Injection
-
-    Managed with Koin 4
-
-🧪 Testing & Reliability
-
-  ✅ Unit and UI testing with:
-  
-    Kotlin Test
-    Turbine (Flow testing)
-    AssertK
-  
-  ⚠️ Robust error handling and state management
-
-🛠️ Tech Stack
-
-  Kotlin 2
-  Compose Multiplatform
-  Ktor 3
-  Coil 3
-  Room 2.7.0
-  Koin 4
-
-🎯 Goal 
-  Demonstrate how to build modern cross-platform applications using Kotlin, applying advanced concepts in architecture, API integration, and shared UI development.
-
-This is a Kotlin Multiplatform project targeting Android, iOS.
-
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
-
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
-
-### Build and Run Android Application
-
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
-
-### Build and Run iOS Application
-
-To build and run the development version of the iOS app, use the run configuration from the run widget
-in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.3.20-7F52FF?logo=kotlin&logoColor=white)](https://kotlinlang.org)
+[![Compose Multiplatform](https://img.shields.io/badge/Compose%20Multiplatform-1.10.3-4285F4?logo=jetpackcompose&logoColor=white)](https://www.jetbrains.com/lp/compose-multiplatform/)
+[![Android](https://img.shields.io/badge/Android-minSdk%2024%20%7C%20targetSdk%2036-3DDC84?logo=android&logoColor=white)](https://developer.android.com)
+[![iOS](https://img.shields.io/badge/iOS-supported-000000?logo=apple&logoColor=white)](https://developer.apple.com)
+[![CI Android](https://github.com/gugabrilhante/CoinRoutine/actions/workflows/android-ci.yml/badge.svg)](https://github.com/gugabrilhante/CoinRoutine/actions/workflows/android-ci.yml)
+[![CI iOS](https://github.com/gugabrilhante/CoinRoutine/actions/workflows/ios-ci.yml/badge.svg)](https://github.com/gugabrilhante/CoinRoutine/actions/workflows/ios-ci.yml)
+[![Tests](https://github.com/gugabrilhante/CoinRoutine/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/gugabrilhante/CoinRoutine/actions/workflows/unit-tests.yml)
 
 ---
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## 📱 Demo
+
+> 🎥 [Watch the full demonstration](https://github.com/gugabrilhante/CoinRoutine/issues/1#issue-4129287259)
+
+| Android | iOS |
+|:---:|:---:|
+| ![Android demo](docs/android.gif) | ![iOS demo](docs/ios.gif) |
+
+> **Note:** Add your screenshots/GIFs to the `docs/` folder and they will appear here.
+
+---
+
+## ✨ Highlights
+
+- 🌐 **Kotlin Multiplatform** — shared business logic and UI between Android and iOS from a single codebase
+- 🎨 **Compose Multiplatform** — native-feeling UI on both platforms with animations, dark/light themes, and custom components
+- 🏛️ **Clean Architecture** — strict separation of Domain, Data, and Presentation layers per feature
+- 🔄 **MVVM + MVI-like state** — unidirectional data flow with `StateFlow` and sealed state/event classes
+- 🔌 **Ktor 3** — async REST API integration fetching live cryptocurrency data
+- 💾 **Room 2.8 + SQLite Bundled** — local persistence shared across platforms
+- 💉 **Koin 4** — compile-safe dependency injection with multiplatform modules
+- 🔐 **Biometric Authentication** — fingerprint/Face ID via `expect/actual` for Android and iOS
+- 🧪 **Automated Testing** — unit and UI tests with Kotlin Test, Turbine, and AssertK
+- ⚙️ **CI/CD with GitHub Actions** — automated Android build, iOS build, unit tests, and Kover coverage reports
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technology | Version |
+|---|---|---|
+| Language | Kotlin | 2.3.20 |
+| UI Framework | Compose Multiplatform | 1.10.3 |
+| Networking | Ktor | 3.4.2 |
+| Dependency Injection | Koin | 4.2.0 |
+| Local Database | Room + SQLite Bundled | 2.8.4 / 2.6.2 |
+| Image Loading | Coil | 3.4.0 |
+| Async / Reactive | Kotlin Coroutines + Flow | 1.10.2 |
+| Serialization | kotlinx.serialization | 1.10.0 |
+| Testing | Kotlin Test + Turbine + AssertK | — |
+| Coverage | Kover | 0.9.8 |
+| CI/CD | GitHub Actions | — |
+
+---
+
+## 🏛️ Architecture
+
+The project applies **Clean Architecture** across all features, with each layer having a single responsibility and depending only inward. This pattern is enforced consistently in both shared (`commonMain`) and platform-specific code.
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                   Presentation Layer                     │
+│         ViewModel · UI State · Compose Screens           │
+└──────────────────────────┬──────────────────────────────┘
+                           │ calls
+┌──────────────────────────▼──────────────────────────────┐
+│                     Domain Layer                         │
+│       Use Cases · Repository Interfaces · Models         │
+└──────────────────────────┬──────────────────────────────┘
+                           │ implements
+┌──────────────────────────▼──────────────────────────────┐
+│                      Data Layer                          │
+│   Repository Impl · Remote DataSource · DAO · Mappers    │
+│          Ktor (API)            Room (Local DB)           │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Feature module structure
+
+Each feature (`coins`, `portfolio`, `trade`) follows the same internal layout:
+
+```
+coins/
+├── data/
+│   ├── remote/
+│   │   ├── dto/              # API response DTOs
+│   │   └── impl/             # Ktor data source implementation
+│   └── mapper/               # DTO → Domain model mappers
+├── domain/
+│   ├── api/                  # Remote data source interface
+│   ├── model/                # Domain & presentation models
+│   ├── GetCoinListUseCase.kt
+│   ├── GetCoinDetailsUseCase.kt
+│   └── GetCoinPriceHistoryUseCase.kt
+└── presentation/
+    ├── CoinsListViewModel.kt # StateFlow + MVI-like events
+    ├── CoinsState.kt         # Immutable UI state
+    ├── CoinsListScreen.kt    # Composable screen
+    └── component/            # Reusable Composables
+```
+
+### KMP Source Sets
+
+```
+composeApp/src/
+├── commonMain/     # Shared UI, business logic, domain, data
+├── androidMain/    # Android-specific: Activity, DI module, DB builder
+└── iosMain/        # iOS-specific: MainViewController, DI module, DB builder
+```
+
+Platform-specific behaviour is bridged through Kotlin's `expect/actual` mechanism:
+
+| expect (commonMain) | actual implementations |
+|---|---|
+| `Platform.kt` | `Platform.android.kt` · `Platform.ios.kt` |
+| `AppSecrets.kt` | Reads `secrets.properties` · Reads `Secrets.plist` |
+| `BiometricAuthenticator.kt` | Android BiometricPrompt · iOS LocalAuthentication |
+| `Formatter.kt` | `NumberFormat` (Android) · `NumberFormatter` (iOS) |
+| `platformModule()` | `Module.android.kt` · `Module.ios.kt` |
+
+---
+
+## 📂 Project Structure
+
+```
+CoinRoutine/
+├── composeApp/
+│   └── src/
+│       ├── commonMain/kotlin/.../coinroutine/
+│       │   ├── coins/          # Coins list & detail feature
+│       │   ├── portfolio/      # Portfolio management feature
+│       │   ├── trade/          # Buy & sell feature
+│       │   ├── core/           # Network, DB, error handling, navigation
+│       │   ├── di/             # Shared Koin module
+│       │   └── theme/          # Design system (colors, typography)
+│       ├── androidMain/        # Android entry point & platform implementations
+│       └── iosMain/            # iOS entry point & platform implementations
+├── iosApp/                     # Xcode project & SwiftUI wrapper
+├── .github/workflows/          # CI/CD pipelines
+└── gradle/libs.versions.toml   # Version catalog
+```
+
+---
+
+## ⚙️ CI / CD
+
+Three automated pipelines run on every push and pull request to `master`:
+
+| Pipeline | Trigger | What it does |
+|---|---|---|
+| `android-ci.yml` | push / PR | Assembles Android debug APK |
+| `ios-ci.yml` | push / PR | Compiles Kotlin/Native for iOS · Builds via Xcode · Runs iOS unit tests |
+| `unit-tests.yml` | push / PR | Runs JVM unit tests · Generates Kover HTML coverage report |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Follow the official setup guide for your environment:
+👉 [Kotlin Multiplatform — Get Started](https://kotlinlang.org/docs/multiplatform/get-started.html)
+
+- Android Studio with KMP plugin
+- Xcode (for iOS builds)
+- JDK 17+
+
+### API Configuration
+
+This project uses the [CoinRanking API](https://coinranking.com). Create an account and generate your API key, then configure credentials for each platform:
+
+**Android** — create `secrets.properties` in the project root:
+```properties
+API_KEY="your_api_key_here"
+API_BASE_URL="your_base_url_here"
+```
+
+**iOS** — create `Secrets.plist` inside `iosApp/iosApp/` in Xcode with:
+```
+apiKey  → String → your_api_key_here
+apiUrl  → String → your_base_url_here
+```
+
+### Build & Run
+
+**Android**
+```shell
+./gradlew :composeApp:assembleDebug
+```
+
+**iOS** — open `iosApp/` in Xcode and run, or compile Kotlin/Native directly:
+```shell
+./gradlew :composeApp:compileKotlinIosSimulatorArm64
+```
+
+---
+
+## 📄 About
+
+Project developed while taking the Udemy course **"Ultimate Compose Multiplatform: Android/iOS + Testing"**, then extended with automated testing (Kotlin Test, Turbine, AssertK), Kover coverage, and full CI/CD pipelines with GitHub Actions.
+
+---
+
+> Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
