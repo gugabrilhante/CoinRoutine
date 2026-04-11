@@ -59,31 +59,44 @@ _A cross-platform cryptocurrency wallet simulation built with Kotlin Multiplatfo
 
 ## 🏛️ Architecture
 
-The project applies **Clean Architecture** across all features, with each layer having a single responsibility and depending only inward. This pattern is enforced consistently in both shared (`commonMain`) and platform-specific code.
+The project applies **Clean Architecture** across all features. Dependencies always point inward toward the **Domain layer**, which is the core of the application and depends on nothing else. Both the Presentation and Data layers depend on Domain — never the other way around.
 
+```text
+        Presentation → Domain ← Data
 ```
+
+```text
 ┌─────────────────────────────────────────────────────────┐
 │                   Presentation Layer                     │
 │         ViewModel · UI State · Compose Screens           │
+│                  depends on Domain ↓                     │
 └──────────────────────────┬──────────────────────────────┘
-                           │ calls
-┌──────────────────────────▼──────────────────────────────┐
-│                     Domain Layer                         │
-│       Use Cases · Repository Interfaces · Models         │
-└──────────────────────────┬──────────────────────────────┘
-                           │ implements
-┌──────────────────────────▼──────────────────────────────┐
+                           │
+            ┌──────────────▼──────────────┐
+            │         Domain Layer         │
+            │  Use Cases · Repository      │
+            │  Interfaces · Domain Models  │
+            │   (no external dependencies) │
+            └──────────────▲──────────────┘
+                           │
+┌──────────────────────────┴──────────────────────────────┐
 │                      Data Layer                          │
-│   Repository Impl · Remote DataSource · DAO · Mappers    │
+│  Implements repository interfaces defined in Domain      │
+│  Repository Impl · Remote DataSource · DAO · Mappers     │
 │          Ktor (API)            Room (Local DB)           │
+│                  depends on Domain ↑                     │
 └─────────────────────────────────────────────────────────┘
 ```
+
+- **Domain** — the centre; defines contracts (repository interfaces, use cases, models) and depends on nothing
+- **Presentation** — depends on Domain; calls use cases, never touches Data directly
+- **Data** — depends on Domain; implements the repository interfaces and maps Data ↔ Domain models internally
 
 ### Feature module structure
 
 Each feature (`coins`, `portfolio`, `trade`) follows the same internal layout:
 
-```
+```text
 coins/
 ├── data/
 │   ├── remote/
@@ -105,7 +118,7 @@ coins/
 
 ### KMP Source Sets
 
-```
+```text
 composeApp/src/
 ├── commonMain/     # Shared UI, business logic, domain, data
 ├── androidMain/    # Android-specific: Activity, DI module, DB builder
@@ -126,7 +139,7 @@ Platform-specific behaviour is bridged through Kotlin's `expect/actual` mechanis
 
 ## 📂 Project Structure
 
-```
+```text
 CoinRoutine/
 ├── composeApp/
 │   └── src/
@@ -180,7 +193,7 @@ API_BASE_URL="your_base_url_here"
 ```
 
 **iOS** — create `Secrets.plist` inside `iosApp/iosApp/` in Xcode with:
-```
+```text
 apiKey  → String → your_api_key_here
 apiUrl  → String → your_base_url_here
 ```

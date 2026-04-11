@@ -159,7 +159,7 @@ fun Project.loadLocalProperty(
     }
 
     val envValue = System.getenv(propertyName)
-    if (System.getenv(propertyName) != null) {
+    if (envValue != null && envValue.isNotBlank()) {
         return "\"$envValue\""
     }
     throw GradleException("can not find property : $propertyName")
