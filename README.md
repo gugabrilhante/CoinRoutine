@@ -16,9 +16,9 @@ _A cross-platform cryptocurrency wallet simulation built with Kotlin Multiplatfo
 
 > 🎥 [Watch the full demonstration](https://github.com/gugabrilhante/CoinRoutine/issues/1#issue-4129287259)
 
-| Android | iOS |
-|:---:|:---:|
-| ![Android demo](docs/android.gif) | ![iOS demo](docs/ios.gif) |
+|             Android             |          iOS          |
+|:-------------------------------:|:---------------------:|
+| ![demo](docs/demonstration_coin_routine.gif) |
 
 > **Note:** Add your screenshots/GIFs to the `docs/` folder and they will appear here.
 
