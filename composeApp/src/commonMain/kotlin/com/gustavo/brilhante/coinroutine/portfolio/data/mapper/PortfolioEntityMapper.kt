@@ -3,7 +3,7 @@ package com.gustavo.brilhante.coinroutine.portfolio.data.mapper
 import com.gustavo.brilhante.coinroutine.coins.domain.coin.Coin
 import com.gustavo.brilhante.coinroutine.portfolio.data.local.PortfolioCoinEntity
 import com.gustavo.brilhante.coinroutine.portfolio.domain.PortfolioCoinModel
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 
 fun PortfolioCoinEntity.toPortfolioCoinModel(
     currentPrice: Double,

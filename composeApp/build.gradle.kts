@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.room)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kover)
 }
 
 kotlin {
@@ -82,6 +83,11 @@ kotlin {
             @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.uiTest)
         }
+
+        androidUnitTest.dependencies {
+            implementation(libs.robolectric)
+            implementation(libs.androidx.test.ext.junit)
+        }
     }
 }
 
@@ -124,6 +130,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
 room {
@@ -133,6 +144,7 @@ room {
 dependencies {
     ksp(libs.room.compiler)
     debugImplementation(compose.uiTooling)
+    debugImplementation(libs.test.compose.manifest)
 }
 
 fun Project.loadLocalProperty(
@@ -144,8 +156,12 @@ fun Project.loadLocalProperty(
     if (localPropertiesFile.exists()) {
         localProperties.load(localPropertiesFile.inputStream())
         return localProperties.getProperty(propertyName)
-    } else {
-        throw GradleException("can not find property : $propertyName")
     }
+
+    val envValue = System.getenv(propertyName)
+    if (envValue != null && envValue.isNotBlank()) {
+        return "\"$envValue\""
+    }
+    throw GradleException("can not find property : $propertyName")
 
 }
