@@ -136,13 +136,13 @@ class CoinsListViewModelTest {
             viewModel.onCoinLongPressed(coinId = FakeCoinsRemoteDataSource.defaultCoinDto.uuid)
 
             val loadingState = awaitItem()
-            assertNotNull(loadingState.chartState)
-            assertTrue(loadingState.chartState!!.isLoading)
+            val loadingChartState = assertNotNull(loadingState.chartState)
+            assertTrue(loadingChartState.isLoading)
 
             val loadedState = awaitItem()
-            assertNotNull(loadedState.chartState)
-            assertFalse(loadedState.chartState!!.isLoading)
-            assertEquals(3, loadedState.chartState!!.sparkLine.size)
+            val loadedChartState = assertNotNull(loadedState.chartState)
+            assertFalse(loadedChartState.isLoading)
+            assertEquals(3, loadedChartState.sparkLine.size)
             cancelAndIgnoreRemainingEvents()
         }
 
@@ -164,7 +164,8 @@ class CoinsListViewModelTest {
             skipItems(1) // loading state
 
             val state = awaitItem()
-            assertEquals(listOf(45000.0, 47000.0, 50000.0), state.chartState!!.sparkLine)
+            val chartState = assertNotNull(state.chartState)
+            assertEquals(listOf(45000.0, 47000.0, 50000.0), chartState.sparkLine)
             cancelAndIgnoreRemainingEvents()
         }
 
@@ -212,9 +213,9 @@ class CoinsListViewModelTest {
             skipItems(1)
 
             val state = awaitItem()
-            assertNotNull(state.chartState)
-            assertFalse(state.chartState!!.isLoading)
-            assertTrue(state.chartState!!.sparkLine.isEmpty())
+            val chartState = assertNotNull(state.chartState)
+            assertFalse(chartState.isLoading)
+            assertTrue(chartState.sparkLine.isEmpty())
             cancelAndIgnoreRemainingEvents()
         }
 

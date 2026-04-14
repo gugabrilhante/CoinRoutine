@@ -98,6 +98,7 @@ fun TradeScreen(
                 },
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.testTag("trade_type_label")
             )
             CenteredDollarTextField(
                 amountText = state.amount,
@@ -127,7 +128,7 @@ fun TradeScreen(
                 }
             ),
             contentPadding = PaddingValues(horizontal = 64.dp),
-            modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 32.dp)
+            modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 32.dp).testTag("trade_submit_button")
         ) {
             Text(
                 text = when (tradeType) {

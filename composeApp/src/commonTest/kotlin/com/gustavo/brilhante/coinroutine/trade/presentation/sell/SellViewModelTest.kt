@@ -51,8 +51,8 @@ class SellViewModelTest {
             skipItems(1) // initial loading state
 
             val state = awaitItem()
-            assertNotNull(state.coin)
-            assertEquals(dto.name, state.coin!!.name)
+            val coin = assertNotNull(state.coin)
+            assertEquals(dto.name, coin.name)
             assertFalse(state.isLoading)
             assertNull(state.error)
             assertTrue(

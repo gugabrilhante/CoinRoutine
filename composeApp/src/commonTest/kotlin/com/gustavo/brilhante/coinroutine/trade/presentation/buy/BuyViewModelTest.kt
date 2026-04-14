@@ -48,10 +48,10 @@ class BuyViewModelTest {
             skipItems(1) // initial loading state
 
             val state = awaitItem()
-            assertNotNull(state.coin)
-            assertEquals(dto.name, state.coin!!.name)
-            assertEquals(dto.symbol, state.coin!!.symbol)
-            assertEquals(dto.price, state.coin!!.price)
+            val coin = assertNotNull(state.coin)
+            assertEquals(dto.name, coin.name)
+            assertEquals(dto.symbol, coin.symbol)
+            assertEquals(dto.price, coin.price)
             assertFalse(state.isLoading)
             assertNull(state.error)
             cancelAndIgnoreRemainingEvents()
