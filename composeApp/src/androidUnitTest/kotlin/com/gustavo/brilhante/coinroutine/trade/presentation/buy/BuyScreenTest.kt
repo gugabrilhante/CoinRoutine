@@ -7,14 +7,17 @@ import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.runComposeUiTest
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.gustavo.brilhante.coinroutine.trade.presentation.common.TradeScreen
 import com.gustavo.brilhante.coinroutine.trade.presentation.common.TradeState
 import com.gustavo.brilhante.coinroutine.trade.presentation.common.TradeType
 import com.gustavo.brilhante.coinroutine.trade.presentation.common.UiTradeCoinItem
 import org.junit.After
+import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
 import kotlin.test.Test
 
+@RunWith(AndroidJUnit4::class)
 class BuyScreenTest {
 
     @After
