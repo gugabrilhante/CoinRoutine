@@ -18,11 +18,12 @@ class FakePortfolioRepository : PortfolioRepository {
     private val _data = MutableStateFlow<Result<List<PortfolioCoinModel>, DataError.Remote>>(
         Result.Success(emptyList())
     )
-
     private val _cashBalance = MutableStateFlow(cashBalance)
     private val _portfolioValue = MutableStateFlow(portfolioValue)
+    private val coinMap = mutableMapOf<String, PortfolioCoinModel>()
 
-    private val listOfCoins = mutableListOf<PortfolioCoinModel>()
+    /** Configure the result returned by [getPortfolioCoin] in tests. */
+    var getPortfolioCoinResult: Result<PortfolioCoinModel?, DataError.Remote> = Result.Success(null)
 
     override suspend fun initializeBalance() {
         // no-op
@@ -33,18 +34,22 @@ class FakePortfolioRepository : PortfolioRepository {
     }
 
     override suspend fun getPortfolioCoin(coinId: String): Result<PortfolioCoinModel?, DataError.Remote> {
-        return Result.Success(portfolioCoin)
+        return getPortfolioCoinResult
     }
 
     override suspend fun savePortfolioCoin(portfolioCoin: PortfolioCoinModel): EmptyResult<DataError.Local> {
-        listOfCoins.add(portfolioCoin)
-        _portfolioValue.value = listOfCoins.sumOf { it.ownedAmountInFiat }
-        _data.value = Result.Success(listOfCoins)
+        coinMap[portfolioCoin.coin.id] = portfolioCoin
+        val coins = coinMap.values.toList()
+        _portfolioValue.value = coins.sumOf { it.ownedAmountInFiat }
+        _data.value = Result.Success(coins)
         return Result.Success(Unit)
     }
 
     override suspend fun removeCoinFromPortfolio(coinId: String) {
-        _data.update { Result.Success(emptyList()) }
+        coinMap.remove(coinId)
+        val coins = coinMap.values.toList()
+        _portfolioValue.value = coins.sumOf { it.ownedAmountInFiat }
+        _data.update { Result.Success(coins) }
     }
 
     override fun calculateTotalPortfolioValue(): Flow<Result<Double, DataError.Remote>> {
@@ -57,9 +62,7 @@ class FakePortfolioRepository : PortfolioRepository {
         }.map { Result.Success(it) }
     }
 
-    override fun cashBalanceFlow(): Flow<Double> {
-        return _cashBalance.asStateFlow()
-    }
+    override fun cashBalanceFlow(): Flow<Double> = _cashBalance.asStateFlow()
 
     override suspend fun updateCashBalance(newBalance: Double) {
         _cashBalance.value = newBalance
@@ -67,6 +70,20 @@ class FakePortfolioRepository : PortfolioRepository {
 
     fun simulateError() {
         _data.value = Result.Error(DataError.Remote.SERVER)
+    }
+
+    /** Helper for asserting cash balance changes in tests. */
+    fun getCashBalance(): Double = _cashBalance.value
+
+    /** Helper for asserting a coin was saved/updated with specific values. */
+    fun getSavedCoin(coinId: String): PortfolioCoinModel? = coinMap[coinId]
+
+    /** Helper for checking whether a coin was removed from the portfolio. */
+    fun hasCoin(coinId: String): Boolean = coinMap.containsKey(coinId)
+
+    /** Helper for seeding cash balance in tests. */
+    fun setCashBalance(amount: Double) {
+        _cashBalance.value = amount
     }
 
     companion object {
