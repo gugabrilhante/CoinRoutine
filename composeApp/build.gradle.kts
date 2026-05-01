@@ -87,6 +87,7 @@ kotlin {
         androidUnitTest.dependencies {
             implementation(libs.robolectric)
             implementation(libs.androidx.test.ext.junit)
+            implementation(libs.test.compose.ui.junit4.android)
         }
     }
 }
@@ -134,12 +135,33 @@ android {
         unitTests {
             isIncludeAndroidResources = true
             isReturnDefaultValues = true
+            all { testTask ->
+                if (project.hasProperty("skipUiTests")) {
+                    testTask.filter { excludeTestsMatching("*ScreenTest") }
+                } else if (project.hasProperty("uiTestsOnly")) {
+                    testTask.filter { includeTestsMatching("*ScreenTest") }
+                }
+            }
         }
     }
 }
 
 room {
     schemaDirectory("$projectDir/schemas")
+}
+
+kover {
+    reports {
+        filters {
+            excludes {
+                classes(
+                    "*.BuildConfig",
+                    "*.*Res",
+                    "*.generated.*"
+                )
+            }
+        }
+    }
 }
 
 dependencies {
